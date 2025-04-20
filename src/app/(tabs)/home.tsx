@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 
 import { router } from "expo-router"
 
-import Button from "../components/button";
+import Button from "../../components/button";
 
 export default function Home(){
     return (

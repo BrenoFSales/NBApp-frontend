@@ -5,5 +5,5 @@ import { styles } from "./styles";
 // todas as propriedades de um objeto que não explicitamente delcarados
 export default function Input({...rest}: TextInputProps) {
     // Caso tenha outras propriedades declaradas use o "rest" por último
-    return <TextInput style={styles.input} placeholder="Digite seu nome..." {...rest} />
+    return <TextInput style={styles.input} {...rest} />
 }
