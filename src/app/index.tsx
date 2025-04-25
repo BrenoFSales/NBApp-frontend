@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Image, Alert } from "react-native";
 
 import { router } from "expo-router";
 
@@ -11,7 +11,7 @@ import Input from "../components/Input";
 import Button from "../components/button";
 
 export default function Login() {
-    const [username, setUsername] = useState("Hooper");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const handleLogin = async () => {
@@ -32,10 +32,14 @@ export default function Login() {
 
     return (
         <View style={styles.container}>
+            <Image
+                style={styles.logo}
+                source={require("../../assets/images/logo.png")}
+            />
             <Text style={styles.text}>Olá, {username}</Text>
             <View>
                 <Text style={styles.label}>Nome de Usuário:</Text>
-                <Input value={username} placeholder="Digite seu username..." onChangeText={setUsername} />
+                <Input placeholder="Digite seu username..." onChangeText={setUsername} />
 
                 <Text style={styles.label}>Senha:</Text>
                 <Input value={password} placeholder="Digite sua senha..." secureTextEntry onChangeText={setPassword} />
@@ -50,7 +54,13 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "black"
+        backgroundColor: "#1d2024",
+        gap: 30
+    },
+
+    logo: {
+        width: 150,
+        height: 100,
     },
 
     text: {

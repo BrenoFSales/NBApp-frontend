@@ -1,14 +1,17 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 
-import { router } from "expo-router"
+import GameList from "@/src/components/GameList";
 
-import Button from "../../components/button";
+import { router } from "expo-router";
 
 export default function Home(){
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Home!</Text>
-            <Button title="Voltar" onPress={() => {router.back()}} />
+            <Image
+                style={styles.logo}
+                source={require("../../../assets/images/logo.png")}
+            />
+            <GameList />
         </View>
     )
 }
@@ -16,13 +19,19 @@ export default function Home(){
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "black",
+        backgroundColor: "#1d2024",
+    },
+
+    logo: {
+        margin: 10,
+        width: 100,
+        height: 70,
     },
 
     text: {
         color: "white",
-        fontSize: 30
+        textAlign: "center",
+        fontSize: 25,
+        marginTop: 10
     }
 })
