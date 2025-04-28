@@ -2,14 +2,12 @@ import { View, Text, StyleSheet, Image } from "react-native";
 
 import GameList from "@/src/components/GameList";
 
-import { router } from "expo-router";
-
 export default function Home(){
     return (
         <View style={styles.container}>
             <Image
-                style={styles.logo}
-                source={require("../../../assets/images/logo.png")}
+                style={styles.homeHeaderImg}
+                source={require("../../../assets/images/players.png")}
             />
             <GameList />
         </View>
@@ -22,10 +20,10 @@ export const styles = StyleSheet.create({
         backgroundColor: "#1d2024",
     },
 
-    logo: {
-        margin: 10,
-        width: 100,
-        height: 70,
+    homeHeaderImg: {
+        width: "100%",
+        height: 100,
+        marginBottom: 10
     },
 
     text: {

@@ -67,9 +67,18 @@ export default function GameList(){
 
     const renderItem = ({ item }: {item: any}) => (
         <View style={styles.gameItem}>
-            <Text>{item.home_team.full_name} vs {item.visitor_team.full_name}</Text>
-            <Text>{item.home_team_score} - {item.visitor_team_score}</Text>
-            <Text>Status: {item.status}</Text>
+          <View style={styles.gameCard}>
+            <View>
+              <Text style={styles.nameTeam}>{item.home_team.name}</Text>
+              <Text style={styles.score}>{item.home_team_score}</Text>
+            </View>
+            <Text style={styles.textVersus}>  VS  </Text>
+            <View>
+              <Text style={styles.nameTeam}>{item.visitor_team.name}</Text>
+              <Text style={styles.score}>{item.visitor_team_score}</Text>
+            </View>
+          </View>
+          <Text style={styles.textGame}>Status: {item.status}</Text>
         </View>
     );
 
@@ -78,7 +87,7 @@ export default function GameList(){
     }
 
     return (
-      <View>
+      <View style={styles.container}>
           <View style={styles.dateNavigation}>
               <TouchableOpacity onPress={handleYesterday} style={styles.handleDates}>
                   <Text style={styles.textBtn}>Yesterday</Text>
