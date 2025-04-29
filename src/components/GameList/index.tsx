@@ -40,13 +40,17 @@ export default function GameList(){
     }, [dateGame]); // Executa novamente sempre que a data for alterada
 
     const handleYesterday = () => {
-      const currentDate = new Date(dateGame);
+      const [year, month, day] = dateGame.split('-').map(Number);
+      const currentDate = new Date(year, month - 1, day); // isso usa o fuso local por isso é diferente
+    
       currentDate.setDate(currentDate.getDate() - 1);
-      const year = currentDate.getFullYear();
-      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-      const day = String(currentDate.getDate()).padStart(2, '0');
-      setDateGame(`${year}-${month}-${day}`);
+      const newYear = currentDate.getFullYear();
+      const newMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const newDay = String(currentDate.getDate()).padStart(2, '0');
+    
+      setDateGame(`${newYear}-${newMonth}-${newDay}`);
     };
+    
 
     const handleToday = () => {
       const today = new Date();
