@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Image, ScrollView } from "react-native";
 import axios from "axios";
 
 import { styles } from "./styles";
@@ -65,20 +65,36 @@ export default function GameList(){
       setDateGame(`${year}-${month}-${day}`);
     };
 
+    const formatStatus = (status: string) => {
+      // Tenta interpretar como uma data
+      const date = new Date(status);
+      if (!isNaN(date.getTime())) {
+        // É uma data válida, formata para mostrar só a hora
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        return `${hours}:${minutes}`;
+      } else {
+        // Não é uma data, retorna o texto normal
+        return status;
+      }
+    };
+
     const renderItem = ({ item }: {item: any}) => (
         <View style={styles.gameItem}>
           <View style={styles.gameCard}>
             <View>
+              <Image source={{ uri: `http://192.168.100.98:8080/team-logo/${item.home_team.id}` }} style={styles.teamLogo} />
               <Text style={styles.nameTeam}>{item.home_team.name}</Text>
               <Text style={styles.score}>{item.home_team_score}</Text>
             </View>
             <Text style={styles.textVersus}>  VS  </Text>
             <View>
+            <Image source={{ uri: `http://192.168.100.98:8080/team-logo/${item.visitor_team.id}` }} style={styles.teamLogo} />
               <Text style={styles.nameTeam}>{item.visitor_team.name}</Text>
               <Text style={styles.score}>{item.visitor_team_score}</Text>
             </View>
           </View>
-          <Text style={styles.textGame}>Status: {item.status}</Text>
+          <Text style={styles.textGameStatus}>Status: {formatStatus(item.status)}</Text>
         </View>
     );
 
@@ -92,7 +108,7 @@ export default function GameList(){
     }
 
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
           <View style={styles.dateNavigation}>
               <TouchableOpacity onPress={handleYesterday} style={styles.handleDates}>
                   <Text style={styles.textBtn}>Yesterday</Text>
@@ -104,11 +120,14 @@ export default function GameList(){
                   <Text style={styles.textBtn}>Upcoming</Text>
               </TouchableOpacity>
           </View>
+          <View style={styles.dateGame}>
+            <Text style={styles.textGameStatus}>{dateGame}</Text>
+          </View>
           <FlatList 
               data={games}
               keyExtractor={(item) => item.id.toString()}
               renderItem={renderItem}
           />
-      </View>
+      </ScrollView>
     )
 }
