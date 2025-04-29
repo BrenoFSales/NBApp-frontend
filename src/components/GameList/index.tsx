@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from "react-native";
 import axios from "axios";
 
 import { styles } from "./styles";
@@ -83,7 +83,12 @@ export default function GameList(){
     );
 
     if (loading) {
-        return <Text>Carregando os jogos...</Text>;
+      return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <ActivityIndicator size="large" color="#F88158" />
+          <Text style={styles.textBtn} >Loading game scores...</Text>
+        </View>
+      );
     }
 
     return (

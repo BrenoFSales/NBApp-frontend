@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     textBtn: {
       color: '#f5f5f5',
       fontSize: 16,
+      marginTop: 10
     },
     gameItem: {
       backgroundColor: '#373d45',
